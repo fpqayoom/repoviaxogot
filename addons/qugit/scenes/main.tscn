@@ -1,1 +1,944 @@
-Loading…
+[gd_scene load_steps=3 format=3 uid="uid://qugit_main"]
+
+[ext_resource type="Script" path="res://addons/qugit/scripts/ui.gd" id="1_ui"]
+[ext_resource type="Script" path="res://addons/qugit/scripts/api.gd" id="2_api"]
+
+[node name="QugitPanel" type="Control"]
+script = ExtResource("1_ui")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="API" type="Node" parent="."]
+script = ExtResource("2_api")
+
+[node name="Root" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+theme_override_constants/separation = 3
+
+[node name="Header" type="HBoxContainer" parent="Root"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 30)
+theme_override_constants/separation = 6
+
+[node name="TokenLabel" type="Label" parent="Root/Header"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Token:"
+theme_override_font_sizes/font_size = 12
+
+[node name="TokenInput" type="LineEdit" parent="Root/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "ghp_…"
+secret = true
+theme_override_font_sizes/font_size = 12
+
+[node name="ConnectBtn" type="Button" parent="Root/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+text = "Connect"
+theme_override_font_sizes/font_size = 12
+
+[node name="RateLabel" type="Label" parent="Root/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+text = "API: -- left"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.5, 0.9, 0.5, 1)
+
+[node name="StatusLabel" type="Label" parent="Root"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 18)
+text = "Enter token and click Connect"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Tabs" type="TabContainer" parent="Root"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Repos" type="HSplitContainer" parent="Root/Tabs"]
+layout_mode = 2
+split_offset = 420
+theme_override_constants/separation = 4
+
+[node name="ReposLeft" type="VBoxContainer" parent="Root/Tabs/Repos"]
+layout_mode = 2
+custom_minimum_size = Vector2(300, 0)
+theme_override_constants/separation = 4
+
+[node name="SearchRow" type="HBoxContainer" parent="Root/Tabs/Repos/ReposLeft"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="RepoSearch" type="LineEdit" parent="Root/Tabs/Repos/ReposLeft/SearchRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search repos (blank = yours)"
+theme_override_font_sizes/font_size = 12
+
+[node name="RepoSearchBtn" type="Button" parent="Root/Tabs/Repos/ReposLeft/SearchRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Go"
+theme_override_font_sizes/font_size = 12
+
+[node name="RepoList" type="ItemList" parent="Root/Tabs/Repos/ReposLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="PageRow" type="HBoxContainer" parent="Root/Tabs/Repos/ReposLeft"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="RepoPrev" type="Button" parent="Root/Tabs/Repos/ReposLeft/PageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "< Prev"
+disabled = true
+theme_override_font_sizes/font_size = 11
+
+[node name="RepoPageLbl" type="Label" parent="Root/Tabs/Repos/ReposLeft/PageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(55, 0)
+horizontal_alignment = 1
+text = "Page 1"
+theme_override_font_sizes/font_size = 11
+
+[node name="RepoNext" type="Button" parent="Root/Tabs/Repos/ReposLeft/PageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Next >"
+theme_override_font_sizes/font_size = 11
+
+[node name="ReposRight" type="VBoxContainer" parent="Root/Tabs/Repos"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="RepoDetail" type="RichTextLabel" parent="Root/Tabs/Repos/ReposRight"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=#888]Select a repo.[/color]"
+theme_override_font_sizes/font_size = 12
+
+[node name="NewRepoSep" type="HSeparator" parent="Root/Tabs/Repos/ReposRight"]
+layout_mode = 2
+
+[node name="NewRepoLbl" type="Label" parent="Root/Tabs/Repos/ReposRight"]
+layout_mode = 2
+text = "Create New Repo"
+theme_override_font_sizes/font_size = 12
+
+[node name="NewRepoGrid" type="GridContainer" parent="Root/Tabs/Repos/ReposRight"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 4
+
+[node name="NRNameLbl" type="Label" parent="Root/Tabs/Repos/ReposRight/NewRepoGrid"]
+layout_mode = 2
+text = "Name:"
+theme_override_font_sizes/font_size = 12
+
+[node name="NewRepoName" type="LineEdit" parent="Root/Tabs/Repos/ReposRight/NewRepoGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "my-repo"
+theme_override_font_sizes/font_size = 12
+
+[node name="NRDescLbl" type="Label" parent="Root/Tabs/Repos/ReposRight/NewRepoGrid"]
+layout_mode = 2
+text = "Desc:"
+theme_override_font_sizes/font_size = 12
+
+[node name="NewRepoDesc" type="LineEdit" parent="Root/Tabs/Repos/ReposRight/NewRepoGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Optional description"
+theme_override_font_sizes/font_size = 12
+
+[node name="NRPrivLbl" type="Label" parent="Root/Tabs/Repos/ReposRight/NewRepoGrid"]
+layout_mode = 2
+text = "Private:"
+theme_override_font_sizes/font_size = 12
+
+[node name="NewRepoPriv" type="CheckBox" parent="Root/Tabs/Repos/ReposRight/NewRepoGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="NewRepoBtn" type="Button" parent="Root/Tabs/Repos/ReposRight"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create Repo"
+theme_override_font_sizes/font_size = 12
+
+[node name="Branches" type="HSplitContainer" parent="Root/Tabs"]
+layout_mode = 2
+split_offset = 260
+theme_override_constants/separation = 4
+
+[node name="BrLeft" type="VBoxContainer" parent="Root/Tabs/Branches"]
+layout_mode = 2
+custom_minimum_size = Vector2(220, 0)
+theme_override_constants/separation = 4
+
+[node name="BrInputGrid" type="GridContainer" parent="Root/Tabs/Branches/BrLeft"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="BrRepoPickLbl" type="Label" parent="Root/Tabs/Branches/BrLeft/BrInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="BrRepoPick" type="OptionButton" parent="Root/Tabs/Branches/BrLeft/BrInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="BrOwnerLbl" type="Label" parent="Root/Tabs/Branches/BrLeft/BrInputGrid"]
+layout_mode = 2
+text = "Owner:"
+theme_override_font_sizes/font_size = 12
+
+[node name="BrOwner" type="LineEdit" parent="Root/Tabs/Branches/BrLeft/BrInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="BrRepoLbl" type="Label" parent="Root/Tabs/Branches/BrLeft/BrInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="BrRepo" type="LineEdit" parent="Root/Tabs/Branches/BrLeft/BrInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="BrFetchBtn" type="Button" parent="Root/Tabs/Branches/BrLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Branches"
+theme_override_font_sizes/font_size = 12
+
+[node name="BrList" type="ItemList" parent="Root/Tabs/Branches/BrLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="BrDeleteBtn" type="Button" parent="Root/Tabs/Branches/BrLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Delete Selected Branch"
+theme_override_font_sizes/font_size = 11
+
+[node name="BrRight" type="VBoxContainer" parent="Root/Tabs/Branches"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="CreateBrLbl" type="Label" parent="Root/Tabs/Branches/BrRight"]
+layout_mode = 2
+text = "Create Branch"
+theme_override_font_sizes/font_size = 12
+
+[node name="BrCreateGrid" type="GridContainer" parent="Root/Tabs/Branches/BrRight"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="BrNewNameLbl" type="Label" parent="Root/Tabs/Branches/BrRight/BrCreateGrid"]
+layout_mode = 2
+text = "New branch:"
+theme_override_font_sizes/font_size = 12
+
+[node name="BrNewName" type="LineEdit" parent="Root/Tabs/Branches/BrRight/BrCreateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "feature/my-branch"
+theme_override_font_sizes/font_size = 12
+
+[node name="BrFromLbl" type="Label" parent="Root/Tabs/Branches/BrRight/BrCreateGrid"]
+layout_mode = 2
+text = "From:"
+theme_override_font_sizes/font_size = 12
+
+[node name="BrFrom" type="OptionButton" parent="Root/Tabs/Branches/BrRight/BrCreateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="BrCreateBtn" type="Button" parent="Root/Tabs/Branches/BrRight"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create Branch"
+theme_override_font_sizes/font_size = 12
+
+[node name="MergeSep" type="HSeparator" parent="Root/Tabs/Branches/BrRight"]
+layout_mode = 2
+
+[node name="MergeLbl" type="Label" parent="Root/Tabs/Branches/BrRight"]
+layout_mode = 2
+text = "Merge Branches"
+theme_override_font_sizes/font_size = 12
+
+[node name="MergeGrid" type="GridContainer" parent="Root/Tabs/Branches/BrRight"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="MergeBaseLbl" type="Label" parent="Root/Tabs/Branches/BrRight/MergeGrid"]
+layout_mode = 2
+text = "Into (base):"
+theme_override_font_sizes/font_size = 12
+
+[node name="MergeBase" type="OptionButton" parent="Root/Tabs/Branches/BrRight/MergeGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="MergeHeadLbl" type="Label" parent="Root/Tabs/Branches/BrRight/MergeGrid"]
+layout_mode = 2
+text = "From (head):"
+theme_override_font_sizes/font_size = 12
+
+[node name="MergeHead" type="OptionButton" parent="Root/Tabs/Branches/BrRight/MergeGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="MergeMsgLbl" type="Label" parent="Root/Tabs/Branches/BrRight/MergeGrid"]
+layout_mode = 2
+text = "Message:"
+theme_override_font_sizes/font_size = 12
+
+[node name="MergeMsg" type="LineEdit" parent="Root/Tabs/Branches/BrRight/MergeGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Merge commit message"
+theme_override_font_sizes/font_size = 12
+
+[node name="MergeBtn" type="Button" parent="Root/Tabs/Branches/BrRight"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Merge"
+theme_override_font_sizes/font_size = 12
+
+[node name="Files" type="HSplitContainer" parent="Root/Tabs"]
+layout_mode = 2
+split_offset = 280
+theme_override_constants/separation = 4
+
+[node name="FilesLeft" type="VBoxContainer" parent="Root/Tabs/Files"]
+layout_mode = 2
+custom_minimum_size = Vector2(240, 0)
+theme_override_constants/separation = 4
+
+[node name="FileInputGrid" type="GridContainer" parent="Root/Tabs/Files/FilesLeft"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="FileRepoPickLbl" type="Label" parent="Root/Tabs/Files/FilesLeft/FileInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="FileRepoPick" type="OptionButton" parent="Root/Tabs/Files/FilesLeft/FileInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="FileOwnerLbl" type="Label" parent="Root/Tabs/Files/FilesLeft/FileInputGrid"]
+layout_mode = 2
+text = "Owner:"
+theme_override_font_sizes/font_size = 12
+
+[node name="FileOwner" type="LineEdit" parent="Root/Tabs/Files/FilesLeft/FileInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="FileRepoLbl" type="Label" parent="Root/Tabs/Files/FilesLeft/FileInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="FileRepo" type="LineEdit" parent="Root/Tabs/Files/FilesLeft/FileInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="FileBranchLbl" type="Label" parent="Root/Tabs/Files/FilesLeft/FileInputGrid"]
+layout_mode = 2
+text = "Branch:"
+theme_override_font_sizes/font_size = 12
+
+[node name="FileBranch" type="OptionButton" parent="Root/Tabs/Files/FilesLeft/FileInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="FileLoadBtn" type="Button" parent="Root/Tabs/Files/FilesLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Browse Remote Files"
+theme_override_font_sizes/font_size = 12
+
+[node name="FileTree" type="ItemList" parent="Root/Tabs/Files/FilesLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="LocalSep" type="HSeparator" parent="Root/Tabs/Files/FilesLeft"]
+layout_mode = 2
+
+[node name="LocalLbl" type="Label" parent="Root/Tabs/Files/FilesLeft"]
+layout_mode = 2
+text = "Local Push (multi-file)"
+theme_override_font_sizes/font_size = 11
+
+[node name="LocalRow" type="HBoxContainer" parent="Root/Tabs/Files/FilesLeft"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LocalPath" type="LineEdit" parent="Root/Tabs/Files/FilesLeft/LocalRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "res://"
+theme_override_font_sizes/font_size = 11
+
+[node name="ScanBtn" type="Button" parent="Root/Tabs/Files/FilesLeft/LocalRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Scan"
+theme_override_font_sizes/font_size = 11
+
+[node name="PushMultiBtn" type="Button" parent="Root/Tabs/Files/FilesLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Push All Scanned Files"
+theme_override_font_sizes/font_size = 11
+
+[node name="PushSelBtn" type="Button" parent="Root/Tabs/Files/FilesLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Push Selected Files"
+theme_override_font_sizes/font_size = 11
+
+[node name="IgnoreLbl" type="Label" parent="Root/Tabs/Files/FilesLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ignored: 0  |  Shown: 0"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="FilesRight" type="VBoxContainer" parent="Root/Tabs/Files"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="FilePathLbl" type="Label" parent="Root/Tabs/Files/FilesRight"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "No file selected"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+
+[node name="FileContent" type="CodeEdit" parent="Root/Tabs/Files/FilesRight"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="PushRow" type="HBoxContainer" parent="Root/Tabs/Files/FilesRight"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PushMsg" type="LineEdit" parent="Root/Tabs/Files/FilesRight/PushRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Commit message…"
+theme_override_font_sizes/font_size = 12
+
+[node name="PushBtn" type="Button" parent="Root/Tabs/Files/FilesRight/PushRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Push"
+theme_override_font_sizes/font_size = 12
+
+[node name="PullBtn" type="Button" parent="Root/Tabs/Files/FilesRight/PushRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pull to Local"
+theme_override_font_sizes/font_size = 12
+
+[node name="Commits" type="HSplitContainer" parent="Root/Tabs"]
+layout_mode = 2
+split_offset = 340
+theme_override_constants/separation = 4
+
+[node name="CmLeft" type="VBoxContainer" parent="Root/Tabs/Commits"]
+layout_mode = 2
+custom_minimum_size = Vector2(280, 0)
+theme_override_constants/separation = 4
+
+[node name="CmInputGrid" type="GridContainer" parent="Root/Tabs/Commits/CmLeft"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="CmRepoPickLbl" type="Label" parent="Root/Tabs/Commits/CmLeft/CmInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="CmRepoPick" type="OptionButton" parent="Root/Tabs/Commits/CmLeft/CmInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="CmOwnerLbl" type="Label" parent="Root/Tabs/Commits/CmLeft/CmInputGrid"]
+layout_mode = 2
+text = "Owner:"
+theme_override_font_sizes/font_size = 12
+
+[node name="CmOwner" type="LineEdit" parent="Root/Tabs/Commits/CmLeft/CmInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="CmRepoLbl" type="Label" parent="Root/Tabs/Commits/CmLeft/CmInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="CmRepo" type="LineEdit" parent="Root/Tabs/Commits/CmLeft/CmInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="CmBranchLbl" type="Label" parent="Root/Tabs/Commits/CmLeft/CmInputGrid"]
+layout_mode = 2
+text = "Branch:"
+theme_override_font_sizes/font_size = 12
+
+[node name="CmBranch" type="LineEdit" parent="Root/Tabs/Commits/CmLeft/CmInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "main"
+theme_override_font_sizes/font_size = 12
+
+[node name="CmFetchBtn" type="Button" parent="Root/Tabs/Commits/CmLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Commits"
+theme_override_font_sizes/font_size = 12
+
+[node name="CmList" type="ItemList" parent="Root/Tabs/Commits/CmLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="CmPageRow" type="HBoxContainer" parent="Root/Tabs/Commits/CmLeft"]
+layout_mode = 2
+alignment = 1
+
+[node name="CmPrev" type="Button" parent="Root/Tabs/Commits/CmLeft/CmPageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "< Prev"
+disabled = true
+theme_override_font_sizes/font_size = 11
+
+[node name="CmNext" type="Button" parent="Root/Tabs/Commits/CmLeft/CmPageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Next >"
+theme_override_font_sizes/font_size = 11
+
+[node name="CmRight" type="VSplitContainer" parent="Root/Tabs/Commits"]
+layout_mode = 2
+size_flags_horizontal = 3
+split_offset = 160
+theme_override_constants/separation = 4
+
+[node name="CmDetail" type="RichTextLabel" parent="Root/Tabs/Commits/CmRight"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "[color=#888]Select a commit.[/color]"
+theme_override_font_sizes/font_size = 12
+
+[node name="DiffView" type="CodeEdit" parent="Root/Tabs/Commits/CmRight"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+theme_override_font_sizes/font_size = 11
+
+[node name="PullRequests" type="HSplitContainer" parent="Root/Tabs"]
+layout_mode = 2
+split_offset = 320
+theme_override_constants/separation = 4
+
+[node name="PrLeft" type="VBoxContainer" parent="Root/Tabs/PullRequests"]
+layout_mode = 2
+custom_minimum_size = Vector2(260, 0)
+theme_override_constants/separation = 4
+
+[node name="PrInputGrid" type="GridContainer" parent="Root/Tabs/PullRequests/PrLeft"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="PrRepoPickLbl" type="Label" parent="Root/Tabs/PullRequests/PrLeft/PrInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrRepoPick" type="OptionButton" parent="Root/Tabs/PullRequests/PrLeft/PrInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="PrOwnerLbl" type="Label" parent="Root/Tabs/PullRequests/PrLeft/PrInputGrid"]
+layout_mode = 2
+text = "Owner:"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrOwner" type="LineEdit" parent="Root/Tabs/PullRequests/PrLeft/PrInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="PrRepoLbl" type="Label" parent="Root/Tabs/PullRequests/PrLeft/PrInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrRepo" type="LineEdit" parent="Root/Tabs/PullRequests/PrLeft/PrInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="PrStateLbl" type="Label" parent="Root/Tabs/PullRequests/PrLeft/PrInputGrid"]
+layout_mode = 2
+text = "State:"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrStateOpt" type="OptionButton" parent="Root/Tabs/PullRequests/PrLeft/PrInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 0
+popup/item_0/text = "Open"
+popup/item_0/id = 0
+popup/item_1/text = "Closed"
+popup/item_1/id = 1
+popup/item_2/text = "All"
+popup/item_2/id = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="PrFetchBtn" type="Button" parent="Root/Tabs/PullRequests/PrLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load PRs"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrList" type="ItemList" parent="Root/Tabs/PullRequests/PrLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="PrActionRow" type="HBoxContainer" parent="Root/Tabs/PullRequests/PrLeft"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PrMergeBtn" type="Button" parent="Root/Tabs/PullRequests/PrLeft/PrActionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Merge PR"
+theme_override_font_sizes/font_size = 11
+
+[node name="PrCloseBtn" type="Button" parent="Root/Tabs/PullRequests/PrLeft/PrActionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Close PR"
+theme_override_font_sizes/font_size = 11
+
+[node name="PrRight" type="VBoxContainer" parent="Root/Tabs/PullRequests"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="PrDetail" type="RichTextLabel" parent="Root/Tabs/PullRequests/PrRight"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=#888]Select a PR.[/color]"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrCreateSep" type="HSeparator" parent="Root/Tabs/PullRequests/PrRight"]
+layout_mode = 2
+
+[node name="PrCreateLbl" type="Label" parent="Root/Tabs/PullRequests/PrRight"]
+layout_mode = 2
+text = "Open New Pull Request"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrCreateGrid" type="GridContainer" parent="Root/Tabs/PullRequests/PrRight"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="PrTitleLbl" type="Label" parent="Root/Tabs/PullRequests/PrRight/PrCreateGrid"]
+layout_mode = 2
+text = "Title:"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrTitle" type="LineEdit" parent="Root/Tabs/PullRequests/PrRight/PrCreateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "PR title"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrHeadLbl" type="Label" parent="Root/Tabs/PullRequests/PrRight/PrCreateGrid"]
+layout_mode = 2
+text = "Head:"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrHead" type="LineEdit" parent="Root/Tabs/PullRequests/PrRight/PrCreateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "feature/branch"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrBaseLbl" type="Label" parent="Root/Tabs/PullRequests/PrRight/PrCreateGrid"]
+layout_mode = 2
+text = "Base:"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrBase" type="LineEdit" parent="Root/Tabs/PullRequests/PrRight/PrCreateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "main"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrBody" type="TextEdit" parent="Root/Tabs/PullRequests/PrRight"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 60)
+placeholder_text = "PR description…"
+theme_override_font_sizes/font_size = 12
+
+[node name="PrCreateBtn" type="Button" parent="Root/Tabs/PullRequests/PrRight"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create Pull Request"
+theme_override_font_sizes/font_size = 12
+
+[node name="Issues" type="HSplitContainer" parent="Root/Tabs"]
+layout_mode = 2
+split_offset = 300
+theme_override_constants/separation = 4
+
+[node name="IsLeft" type="VBoxContainer" parent="Root/Tabs/Issues"]
+layout_mode = 2
+custom_minimum_size = Vector2(240, 0)
+theme_override_constants/separation = 4
+
+[node name="IsInputGrid" type="GridContainer" parent="Root/Tabs/Issues/IsLeft"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="IsRepoPickLbl" type="Label" parent="Root/Tabs/Issues/IsLeft/IsInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsRepoPick" type="OptionButton" parent="Root/Tabs/Issues/IsLeft/IsInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="IsOwnerLbl" type="Label" parent="Root/Tabs/Issues/IsLeft/IsInputGrid"]
+layout_mode = 2
+text = "Owner:"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsOwner" type="LineEdit" parent="Root/Tabs/Issues/IsLeft/IsInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="IsRepoLbl" type="Label" parent="Root/Tabs/Issues/IsLeft/IsInputGrid"]
+layout_mode = 2
+text = "Repo:"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsRepo" type="LineEdit" parent="Root/Tabs/Issues/IsLeft/IsInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="IsStateLbl" type="Label" parent="Root/Tabs/Issues/IsLeft/IsInputGrid"]
+layout_mode = 2
+text = "State:"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsStateOpt" type="OptionButton" parent="Root/Tabs/Issues/IsLeft/IsInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 0
+popup/item_0/text = "Open"
+popup/item_0/id = 0
+popup/item_1/text = "Closed"
+popup/item_1/id = 1
+popup/item_2/text = "All"
+popup/item_2/id = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="IsFetchBtn" type="Button" parent="Root/Tabs/Issues/IsLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Issues"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsList" type="ItemList" parent="Root/Tabs/Issues/IsLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="IsCloseBtn" type="Button" parent="Root/Tabs/Issues/IsLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Close Selected Issue"
+theme_override_font_sizes/font_size = 11
+
+[node name="IsRight" type="VBoxContainer" parent="Root/Tabs/Issues"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="IsDetail" type="RichTextLabel" parent="Root/Tabs/Issues/IsRight"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=#888]Select an issue.[/color]"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsCreateSep" type="HSeparator" parent="Root/Tabs/Issues/IsRight"]
+layout_mode = 2
+
+[node name="IsCreateLbl" type="Label" parent="Root/Tabs/Issues/IsRight"]
+layout_mode = 2
+text = "Create Issue"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsTitleRow" type="HBoxContainer" parent="Root/Tabs/Issues/IsRight"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="IsTitleLbl" type="Label" parent="Root/Tabs/Issues/IsRight/IsTitleRow"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Title:"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsTitle" type="LineEdit" parent="Root/Tabs/Issues/IsRight/IsTitleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Issue title"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsBody" type="TextEdit" parent="Root/Tabs/Issues/IsRight"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 60)
+placeholder_text = "Description…"
+theme_override_font_sizes/font_size = 12
+
+[node name="IsCreateBtn" type="Button" parent="Root/Tabs/Issues/IsRight"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create Issue"
+theme_override_font_sizes/font_size = 12
